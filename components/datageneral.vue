@@ -67,6 +67,10 @@ export default {
           value: 'storename',
         },
         {
+          text: 'ที่ตั้งเลขที่',
+          value: 'address',
+        },
+        {
           text: 'หมู่ที่',
           value: 'village',
         },

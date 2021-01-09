@@ -10,6 +10,7 @@
  $sex = $data['sex'];
  $age = $data['age'];
  $storename = $data['storename'];
+ $address = $data['address'];
  $village = $data['village'];
  $tambon = $data['tambon'];
  $pcucode = $data['pcucode'];
@@ -52,9 +53,9 @@ if (!empty($name)) {
  
 
     
-       $strvisit  = "  INSERT INTO drugstore(storeid,name,lastname,sex,age,storename,village,tambon,pcucode,grocery,education,training,
+       $strvisit  = "  INSERT INTO drugstore(storeid,name,lastname,sex,age,storename,address,village,tambon,pcucode,grocery,education,training,
        datacollector1,affiliate1,datacollector2,affiliate2,datacollector3,affiliate3,datestart,timestart,dateadd) 
-        VALUES('".$id."','".$name."','".$lastname."','".$sex."','".$age."','".$storename."','".$village."','".$tambon."','".$pcucode."','".$grocery."','".$education."','".$training."',
+        VALUES('".$id."','".$name."','".$lastname."','".$sex."','".$age."','".$storename."','".$address."','".$village."','".$tambon."','".$pcucode."','".$grocery."','".$education."','".$training."',
         '".$datacollector1."','".$affiliate1."','".$datacollector2."','".$affiliate2."','".$datacollector3."','".$affiliate3."','".$datestart."','".$timestart."',CURRENT_TIMESTAMP)";
         
         

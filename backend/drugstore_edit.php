@@ -13,6 +13,7 @@
  drugstore.sex,
  drugstore.age,
  drugstore.storename,
+ drugstore.address,
  drugstore.village,
  drugstore.tambon,
  drugstore.pcucode,

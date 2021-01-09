@@ -12,6 +12,7 @@
  $sex = $data['sex'];
  $age = $data['age'];
  $storename = $data['storename'];
+ $address = $data['address'];
  $village = $data['village'];
  $tambon = $data['tambon'];
  $pcucode = $data['pcucode'];
@@ -36,6 +37,7 @@ lastname = '" . $lastname ."',
 sex = '" . $sex ."',
 age = '" . $age ."',
 storename = '" . $storename ."',
+address = '" . $address ."',
 village = '" . $village ."',
 tambon = '" . $tambon ."',
 pcucode = '" . $pcucode ."',

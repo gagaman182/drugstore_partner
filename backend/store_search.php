@@ -3,6 +3,8 @@
    
 	 include 'conn.php';
 
+    $storeid = $_GET["storeid"];
+
 
  $sql = "SELECT
  drugstore.storeid,
@@ -17,6 +19,12 @@
  t_grocery.name as grocery,
  t_education.name as education,
  t_training.name as training,
+ drugstore.datacollector1,
+ drugstore.affiliate1,
+ drugstore.datacollector2,
+ drugstore.affiliate2,
+ drugstore.datacollector3,
+ drugstore.affiliate3,
  CONCAT(DATE_FORMAT(drugstore.datestart,'%d-%m'),'-',DATE_FORMAT(drugstore.datestart,'%Y')+543) as  datestart,
 drugstore.timestart
  
@@ -27,7 +35,12 @@ drugstore.timestart
  LEFT JOIN t_grocery on drugstore.grocery = t_grocery.grocery
  LEFT JOIN t_education on drugstore.education = t_education.education
  LEFT JOIN t_training on drugstore.training = t_training.training
- order by  drugstore.storeid ";
+ 
+where  drugstore.storeid  = '".$storeid."'
+
+
+
+";
 
 
 $return_arr = array();

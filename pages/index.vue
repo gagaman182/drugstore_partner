@@ -49,6 +49,14 @@
                   shaped
                 ></v-text-field>
               </v-col>
+              <v-col cols="12" md="2">
+                <v-text-field
+                  v-model="address"
+                  label="ที่ตั้งเลขที่ "
+                  outlined
+                  shaped
+                ></v-text-field>
+              </v-col>
               <v-col cols="12" md="1">
                 <v-select
                   :items="village_list"
@@ -58,7 +66,7 @@
                   label="หมู่"
                 ></v-select>
               </v-col>
-              <v-col cols="12" md="3">
+              <v-col cols="12" md="2">
                 <v-select
                   :items="tambon_list"
                   v-model="tambon"
@@ -69,7 +77,7 @@
                   label="ตำบล"
                 ></v-select>
               </v-col>
-              <v-col cols="12" md="4">
+              <v-col cols="12" md="3">
                 <v-select
                   :items="pcucode_list"
                   v-model="pcucode"
@@ -205,11 +213,11 @@
                   large
                   v-if="!btnshow"
                   class="red--text text--lighten-5"
-                  color="#5aa469"
+                  color="teal lighten-1"
                   flat
                   @click="adddata"
                 >
-                  <v-icon medium>mdi-content-save </v-icon>เพื่ม</v-btn
+                  <v-icon medium>mdi-content-save </v-icon>เพิ่ม</v-btn
                 >
                 <v-btn
                   large
@@ -289,6 +297,7 @@ export default {
     sex: '',
     age: '',
     storename: '',
+    address: '',
     village: '',
     village_list: [
       '1',
@@ -328,6 +337,7 @@ export default {
     cleartime: new Date().toString().substr(16, 5),
     message: '',
     drugstoredetails: '',
+    aa: '',
   }),
   //เวลาของ diaglog
   watch: {
@@ -351,6 +361,7 @@ export default {
         .get(`${this.$axios.defaults.baseURL}t_tambon.php`)
         .then((response) => {
           this.tambon_list = response.data
+          this.aa = this.tambon_list.map((item) => item.tambon)
         })
     },
 
@@ -394,6 +405,7 @@ export default {
         !this.sex ||
         !this.age ||
         !this.storename ||
+        !this.address ||
         !this.village ||
         !this.tambon ||
         !this.pcucode ||
@@ -417,6 +429,7 @@ export default {
             sex: this.sex,
             age: this.age,
             storename: this.storename,
+            address: this.address,
             village: this.village,
             tambon: this.tambon,
             pcucode: this.pcucode,
@@ -460,6 +473,7 @@ export default {
       this.sex = ''
       this.age = ''
       this.storename = ''
+      this.address = ''
       this.village = ''
       this.tambon = ''
       this.pcucode = ''
@@ -496,6 +510,7 @@ export default {
             this.sex = leavedetail.sex
             this.age = leavedetail.age
             this.storename = leavedetail.storename
+            this.address = leavedetail.address
             this.village = leavedetail.village
             this.tambon = leavedetail.tambon
             this.pcucode = leavedetail.pcucode
@@ -534,6 +549,7 @@ export default {
             sex: this.sex,
             age: this.age,
             storename: this.storename,
+            address: this.address,
             village: this.village,
             tambon: this.tambon,
             pcucode: this.pcucode,
@@ -626,3 +642,8 @@ export default {
   },
 }
 </script>
+<style>
+.v-text-field input {
+  font-size: 1.2em;
+}
+</style>
