@@ -3,26 +3,18 @@
     <!-- <v-layout column> -->
     <v-layout row wrap justify-center align-center>
       <v-flex sm12>
-        <v-widget title="  ข้อมูลยาที่พบจากการสำรวจในร้าน" icon="mdi-pill ">
+        <v-widget title="  ข้อมูลยาที่พบจากการสำรวจในร้าน" icon="mdi-store ">
           <div slot="widget-content">
-            <v-row>
-              <v-col cols="12"
-                ><survey_data
-                  @show-dialog="showdiag"
-                  ref="refresh"
-                ></survey_data>
-              </v-col>
-            </v-row>
             <v-row>
               <v-col cols="12">
                 <v-card class="teal lighten-1" dark>
                   <v-card-title>
-                    <h4 class="yellow--text text--darken-2">
-                      บันทึกการสำรวจยาในร้าน
-                      <!-- <v-icon class="yellow--text text--darken-2" medium
+                    <h3 class="yellow--text text--darken-2">
+                      ค้นหาชื่อร้าน
+                      <v-icon class="yellow--text text--darken-2" medium
                         >mdi-credit-card-search
-                      </v-icon> -->
-                    </h4>
+                      </v-icon>
+                    </h3>
                   </v-card-title>
                   <v-card-text dark>
                     <v-autocomplete
@@ -34,13 +26,11 @@
                       filled
                       label="ชื่อแหล่งซื้อ"
                       v-on:change="onChange"
-                      prepend-icon="mdi-database-search"
                     ></v-autocomplete>
                   </v-card-text>
                 </v-card>
               </v-col>
             </v-row>
-
             <v-row>
               <v-col cols="12">
                 <v-card>
@@ -49,20 +39,6 @@
                       ข้อมูลทั่วไป
                       <v-icon medium>mdi-store </v-icon>
                     </h4>
-                    <div v-if="textedit">
-                      <v-chip class="ma-2" color="orange" text-color="white">
-                        แก้ไข
-                      </v-chip>
-                    </div>
-                    <div v-if="textadd">
-                      <v-chip
-                        class="ma-2"
-                        color="teal lighten-1"
-                        text-color="white"
-                      >
-                        เพิ่ม
-                      </v-chip>
-                    </div>
                   </v-card-title>
 
                   <v-card-text dark>
@@ -251,38 +227,7 @@
                 </v-card>
               </v-col>
             </v-row>
-            <v-row>
-              <v-col cols="12">
-                <surveydrug
-                  :storeid="storeid"
-                  ref="child"
-                  :storeidedit="storeidedit"
-                ></surveydrug>
-                <surveydrug2 :storeid="storeid" ref="child2"></surveydrug2>
-                <surveydrug3 :storeid="storeid" ref="child3"></surveydrug3>
-                <surveydrug4 :storeid="storeid" ref="child4"></surveydrug4>
-                <surveydrug5 :storeid="storeid" ref="child5"></surveydrug5>
-                <surveydrug6 :storeid="storeid" ref="child6"></surveydrug6>
-                <surveydrug7 :storeid="storeid" ref="child7"></surveydrug7>
-                <surveydrug8 :storeid="storeid" ref="child8"></surveydrug8>
-                <surveydrug9 :storeid="storeid" ref="child9"></surveydrug9>
-                <surveydrug10 :storeid="storeid" ref="child10"></surveydrug10>
-                <surveydrug11 :storeid="storeid" ref="child11"></surveydrug11>
-                <surveydrug12 :storeid="storeid" ref="child12"></surveydrug12>
-                <other :storeid="storeid" ref="other"></other>
-              </v-col>
-              <v-col cols="12" align="end">
-                <v-btn
-                  large
-                  class="red--text text--lighten-5"
-                  color="teal lighten-1"
-                  flat
-                  @click="adds"
-                >
-                  <v-icon medium>mdi-content-save </v-icon>เพิ่ม</v-btn
-                >
-              </v-col>
-            </v-row>
+            <surveydrug :storeid="storeid" @clear-form="clearform"></surveydrug>
           </div>
         </v-widget>
       </v-flex>
@@ -304,38 +249,12 @@
 <script>
 import VWidget from '@/components/VWidget'
 import surveydrug from '@/components/surveydrug'
-import surveydrug2 from '@/components/surveydrug2'
-import surveydrug3 from '@/components/surveydrug3'
-import surveydrug4 from '@/components/surveydrug4'
-import surveydrug5 from '@/components/surveydrug5'
-import surveydrug6 from '@/components/surveydrug6'
-import surveydrug7 from '@/components/surveydrug7'
-import surveydrug8 from '@/components/surveydrug8'
-import surveydrug9 from '@/components/surveydrug9'
-import surveydrug10 from '@/components/surveydrug10'
-import surveydrug11 from '@/components/surveydrug11'
-import surveydrug12 from '@/components/surveydrug12'
-import other from '@/components/other'
-import survey_data from '@/components/survey_data'
 import axios from 'axios'
 export default {
   name: 'servey',
   components: {
     surveydrug,
-    surveydrug2,
-    surveydrug3,
-    surveydrug4,
-    surveydrug5,
-    surveydrug6,
-    surveydrug7,
-    surveydrug8,
-    surveydrug9,
-    surveydrug10,
-    surveydrug11,
-    surveydrug12,
-    other,
     VWidget,
-    survey_data,
   },
   data: () => ({
     dialog: false,
@@ -351,9 +270,6 @@ export default {
     lastname: '',
     sex: '',
     age: '',
-    storeidedit: '',
-    textedit: false,
-    textadd: false,
   }),
   //เวลาของ diaglog
   watch: {
@@ -377,8 +293,6 @@ export default {
     },
     //เลือก store ตาม id และ แสดง progress
     async onChange() {
-      this.textadd = true
-      this.textedit = false
       await axios
         .get(`${this.$axios.defaults.baseURL}store_search.php`, {
           params: {
@@ -389,7 +303,7 @@ export default {
           this.dialog = true
           this.change = true
           this.storedetails = response.data
-
+          // console.log(this.storedetails)
           this.storedetails.forEach((storenamedetail) => {
             this.storeid = storenamedetail.storeid
             this.name = storenamedetail.name
@@ -419,122 +333,32 @@ export default {
           this.chips = true
         })
     },
-    clearform() {
-      this.storeid = ''
-      this.name = ''
-      this.lastname = ''
-      this.sex = ''
-      this.age = ''
-      this.storename = ''
-      this.address = ''
-      this.village = ''
-      this.tambon = ''
-      this.pcucode = ''
-      this.grocery = ''
-      this.education = ''
-      this.training = ''
-      this.datacollector1 = ''
-      this.affiliate1 = ''
-      this.datacollector2 = ''
-      this.affiliate2 = ''
-      this.datacollector3 = ''
-      this.affiliate3 = ''
-      this.datestart = ''
-      this.timestart = ''
-      this.store_name_select = ''
-      this.chips = false
-    },
-    //เรียกใช้ function ในแต่ล่ะ components
-    adds() {
-      this.addsurvey()
-      this.$refs.child.adddata()
-      this.$refs.child2.adddata()
-      this.$refs.child3.adddata()
-      this.$refs.child4.adddata()
-      this.$refs.child5.adddata()
-      this.$refs.child6.adddata()
-      this.$refs.child7.adddata()
-      this.$refs.child8.adddata()
-      this.$refs.child9.adddata()
-      this.$refs.child10.adddata()
-      this.$refs.child11.adddata()
-      this.$refs.child12.adddata()
-      this.$refs.other.adddata()
-      this.clearform()
-      window.scrollTo(0, 0)
-      this.$refs.refresh.fetch_drugstore()
-    },
-
-    addsurvey() {
-      axios
-        .post(`${this.$axios.defaults.baseURL}main_survey.php`, {
-          storeid: this.storeid,
-        })
-        .then((response) => {
-          this.message = response.data
-
-          if (this.message[0].message === 'เพิ่มข้อมูลสำเร็จ') {
-            this.$swal({
-              title: 'สถานะการเพิ่ม',
-              text: this.message[0].message,
-              icon: 'success',
-              confirmButtonText: 'ตกลง',
-            })
-            this.clear()
-          } else {
-            this.$swal({
-              title: 'สถานะการเพิ่ม',
-              text: this.message[0].message,
-              icon: 'error',
-              confirmButtonText: 'ตกลง',
-            })
-          }
-        })
-    },
-
-    //เลือก store ตาม id และ แสดง progress
-    async showdiag(payload) {
-      this.textedit = true
-      this.textadd = false
-      this.dialog = payload.dialog
-      this.storeidedit = payload.storeid
-
-      this.$refs.child.edit_survey()
-      await axios
-        .get(`${this.$axios.defaults.baseURL}store_search.php`, {
-          params: {
-            storeid: payload.storeid,
-          },
-        })
-        .then((response) => {
-          this.drugstoredetails = response.data
-
-          this.drugstoredetails.forEach((leavedetail) => {
-            this.storeid = leavedetail.storeid
-            this.name = leavedetail.name
-            this.lastname = leavedetail.lastname
-            this.sex = leavedetail.sex
-            this.age = leavedetail.age
-            this.storename = leavedetail.storename
-            this.address = leavedetail.address
-            this.village = leavedetail.village
-            this.tambon = leavedetail.tambon
-            this.pcucode = leavedetail.pcucode
-            this.grocery = leavedetail.grocery
-            this.education = leavedetail.education
-            this.training = leavedetail.training
-            this.datacollector1 = leavedetail.datacollector1
-            this.affiliate1 = leavedetail.affiliate1
-            this.datacollector2 = leavedetail.datacollector2
-            this.affiliate2 = leavedetail.affiliate2
-            this.datacollector3 = leavedetail.datacollector3
-            this.affiliate3 = leavedetail.affiliate3
-            this.datestart = leavedetail.datestart
-            this.timestart = leavedetail.timestart
-          })
-          this.chips = true
-          // window.scrollTo(0, 0)
-        })
+    clearform(payload) {
+      if (payload.clears === 'clear') {
+        this.storeid = ''
+        this.name = ''
+        this.lastname = ''
+        this.sex = ''
+        this.age = ''
+        this.storename = ''
+        this.address = ''
+        this.village = ''
+        this.tambon = ''
+        this.pcucode = ''
+        this.grocery = ''
+        this.education = ''
+        this.training = ''
+        this.datacollector1 = ''
+        this.affiliate1 = ''
+        this.datacollector2 = ''
+        this.affiliate2 = ''
+        this.datacollector3 = ''
+        this.affiliate3 = ''
+        this.datestart = ''
+        this.timestart = ''
+        this.store_name_select = ''
+        this.chips = false
+      }
     },
   },
 }

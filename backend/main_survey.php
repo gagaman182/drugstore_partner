@@ -6,16 +6,22 @@
  $data = json_decode(file_get_contents('php://input'),true);
 
   $storeid = $data['storeid'];
-  $motivationid = $data['motivationid'];
-  $typedruggroup = $data['typedruggroup'];
-
   
+
+ 
+  
+
+
+
+
 include 'conn.php';
 
 
 
+
+
  // หา record ล่าสุด
-$sql = "SELECT count(*) as total from motivation";
+$sql = "SELECT count(*) as total from main_survey";
  
 if ($result = mysqli_query( $conn, $sql )){
   
@@ -30,11 +36,13 @@ if ($result = mysqli_query( $conn, $sql )){
 
 if (!empty($storeid)) {
  
-  
-       $strvisit  = "  INSERT INTO motivation(id,storeid,motivationid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$motivationid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+
+    
+       $strvisit  = "  INSERT INTO main_survey(id,storeid,dateadd) 
+        VALUES('".$id."','".$storeid."',CURRENT_TIMESTAMP)";
         
-           
+        
+        
         if ($conn->query($strvisit) === TRUE) {
           
             
@@ -46,7 +54,7 @@ if (!empty($storeid)) {
         } else {
             // echo "Error: " . $sql . "<br>" . $conn->error;
             $return_message = array();
-            $row_array['message'] = "เพิ่มข้อมูลไม่สำเร็จ";
+            $row_array['message'] = "เพิ่มข้อมูลไม่สำเร็จ/มีข้อมูลอยู่แล้ว";
             array_push($return_message,$row_array);
             
         }

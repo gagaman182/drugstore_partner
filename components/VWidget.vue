@@ -10,9 +10,9 @@
         v-if="enableHeader"
       >
         <v-toolbar-title
-          ><h5>
+          ><h3>
             <v-icon dark>{{ icon }}</v-icon> {{ title }}
-          </h5></v-toolbar-title
+          </h3></v-toolbar-title
         >
         <v-spacer></v-spacer>
         <slot name="widget-header-action"></slot>

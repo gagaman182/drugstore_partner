@@ -3,70 +3,16 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>
-            <h4>
-              ข้อมูลยาที่พบจากการสำรวจในร้าน
-              <v-icon medium>mdi-credit-card-search</v-icon>
-            </h4>
-          </v-card-title>
-
           <v-card-text dark>
-            <row>
-              <v-col cols="12" justify-center align-center>
-                <v-chip class="ma-2" color="cyan" label text-color="white">
-                  <h3>ยาแผนปัจจุบัน</h3>
-                </v-chip>
-              </v-col>
-              <v-col><v-divider></v-divider></v-col>
-            </row>
             <v-row>
               <v-col cols="12" md="3"
                 ><div class="text-md-center">
-                  <v-alert text color="purple darken-3"
-                    ><h4>ประเด็น</h4>
-                  </v-alert>
-                </div>
-              </v-col>
-              <v-col cols="12" md="1"
-                ><div class="text-md-center">
-                  <v-alert text color="purple darken-3">
-                    <h4>ไม่พบ/พบ</h4></v-alert
-                  >
-                </div>
-              </v-col>
-
-              <v-col cols="12" md="4"
-                ><div class="text-md-center">
-                  <v-alert text color="purple darken-3">
-                    <h4>แหล่งซื้อ</h4></v-alert
-                  >
-                </div>
-              </v-col>
-              <v-col cols="12" md="4"
-                ><div class="text-md-center">
-                  <v-alert text color="purple darken-3">
-                    <h4>เหตุผลการจำหน่าย</h4>
-                  </v-alert>
-                </div>
-              </v-col>
-              <v-col><v-divider></v-divider></v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12" md="3"
-                ><div class="text-md-center">
-                 
-                    <h2>ยา NSAIDs</h2>
-                 
-                 
+                  <h2>ยาไม่มีทะเบียน</h2>
                 </div>
               </v-col>
 
               <v-col cols="12" md="1">
-                
                 <v-switch @change="change_row" v-model="switchs"></v-switch>
-                 </v-switch
-                >
               </v-col>
               <v-col cols="12" md="4"
                 ><div
@@ -178,8 +124,6 @@
                 </div>
               </v-col>
             </v-row>
-
-          
           </v-card-text>
         </v-card>
       </v-col>
@@ -190,10 +134,9 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'surveydrug',
+  name: 'surveydrug3',
   props: {
     storeid: null,
-    storeidedit:null
   },
   data: () => ({
     row: false,
@@ -215,8 +158,6 @@ export default {
     drugstore: '',
     drugstore_list: [],
     message: '',
-    surveydrugdetails:'',
-    aa:''
   }),
   mounted() {
     this.fetch_source()
@@ -224,28 +165,8 @@ export default {
     this.fecth_drugstore()
     this.fecth_tradename()
     this.fecth_generic()
-
-   
   },
   methods: {
-    //แก้ไข ข้อมูล
-    edit_survey(){
-   
-      // alert(this.storeidedit)
-
-        axios
-        .get(`${this.$axios.defaults.baseURL}surveydrug_edit.php`, {
-          params: {
-            storeid: this.storeidedit,
-          },
-        })
-        .then((response) => {
-          this.source = response.data
-          this.switchs = true
-          this.row = true
-        })
-    },
-
     clear() {
       this.source = ''
       this.motivation = ''
@@ -302,7 +223,7 @@ export default {
     //เพิ่มข้อมูล
     adddata() {
       if (this.switchs) {
-        this.typedruggroup = '1'
+        this.typedruggroup = '3'
         this.addselect()
       }
     },
@@ -331,10 +252,6 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
-              //สั้ง clear from ข้างนอก
-              // this.$emit('clear-form', {
-              //   clears: 'clear',
-              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -369,10 +286,6 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
-              //สั้ง clear from ข้างนอก
-              // this.$emit('clear-form', {
-              //   clears: 'clear',
-              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -407,10 +320,6 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
-              //สั้ง clear from ข้างนอก
-              // this.$emit('clear-form', {
-              //   clears: 'clear',
-              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -445,10 +354,6 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
-              //สั้ง clear from ข้างนอก
-              // this.$emit('clear-form', {
-              //   clears: 'clear',
-              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -483,10 +388,6 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
-              //สั้ง clear from ข้างนอก
-              // this.$emit('clear-form', {
-              //   clears: 'clear',
-              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',

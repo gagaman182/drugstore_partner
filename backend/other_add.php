@@ -6,16 +6,22 @@
  $data = json_decode(file_get_contents('php://input'),true);
 
   $storeid = $data['storeid'];
-  $motivationid = $data['motivationid'];
-  $typedruggroup = $data['typedruggroup'];
+  $other = $data['other'];
 
+ 
   
+
+
+
+
 include 'conn.php';
 
 
 
+
+
  // หา record ล่าสุด
-$sql = "SELECT count(*) as total from motivation";
+$sql = "SELECT count(*) as total from other";
  
 if ($result = mysqli_query( $conn, $sql )){
   
@@ -30,11 +36,13 @@ if ($result = mysqli_query( $conn, $sql )){
 
 if (!empty($storeid)) {
  
-  
-       $strvisit  = "  INSERT INTO motivation(id,storeid,motivationid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$motivationid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+
+    
+       $strvisit  = "  INSERT INTO other(id,storeid,other,dateadd) 
+        VALUES('".$id."','".$storeid."','".$other."',CURRENT_TIMESTAMP)";
         
-           
+        
+        
         if ($conn->query($strvisit) === TRUE) {
           
             

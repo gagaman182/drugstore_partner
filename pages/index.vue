@@ -254,7 +254,7 @@
         </v-widget>
       </v-flex>
       <v-flex sm12>
-        <v-widget title="ตารางข้อมูลทั่วไป" icon="mdi-folder-table-outline ">
+        <v-widget title="ตารางข้อมูลทั่วไป" icon="mdi-folder-table-outline">
           <div slot="widget-content">
             <v-row>
               <v-col cols="12">
@@ -412,8 +412,8 @@ export default {
         !this.grocery ||
         !this.education ||
         !this.training ||
-        this.datestart ||
-        this.timestart
+        !this.datestart ||
+        !this.timestart
       ) {
         this.$swal({
           title: 'แจ้งเตือน',

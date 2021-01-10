@@ -3,18 +3,13 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-card-title>
-            <h4>
-              ข้อมูลยาที่พบจากการสำรวจในร้าน
-              <v-icon medium>mdi-credit-card-search</v-icon>
-            </h4>
-          </v-card-title>
+         
 
           <v-card-text dark>
             <row>
               <v-col cols="12" justify-center align-center>
                 <v-chip class="ma-2" color="cyan" label text-color="white">
-                  <h3>ยาแผนปัจจุบัน</h3>
+                  <h3>ยาสมุนไพร/แผนโบราณ</h3>
                 </v-chip>
               </v-col>
               <v-col><v-divider></v-divider></v-col>
@@ -56,8 +51,7 @@
               <v-col cols="12" md="3"
                 ><div class="text-md-center">
                  
-                    <h2>ยา NSAIDs</h2>
-                 
+                    <h2>ยาไม่มีทะเบียน(ยาผง ยาลูกกลอน ยาน้ำ)</h2>
                  
                 </div>
               </v-col>
@@ -179,7 +173,20 @@
               </v-col>
             </v-row>
 
-          
+            <!-- <v-row>
+              <v-col><v-divider></v-divider></v-col>
+              <v-col cols="12" align="end">
+                <v-btn
+                  large
+                  class="red--text text--lighten-5"
+                  color="teal lighten-1"
+                  flat
+                  @click="adddata"
+                >
+                  <v-icon medium>mdi-content-save </v-icon>เพิ่ม</v-btn
+                >
+              </v-col></v-row
+            > -->
           </v-card-text>
         </v-card>
       </v-col>
@@ -190,10 +197,9 @@
 <script>
 import axios from 'axios'
 export default {
-  name: 'surveydrug',
+  name: 'surveydrug8',
   props: {
     storeid: null,
-    storeidedit:null
   },
   data: () => ({
     row: false,
@@ -215,8 +221,6 @@ export default {
     drugstore: '',
     drugstore_list: [],
     message: '',
-    surveydrugdetails:'',
-    aa:''
   }),
   mounted() {
     this.fetch_source()
@@ -224,28 +228,8 @@ export default {
     this.fecth_drugstore()
     this.fecth_tradename()
     this.fecth_generic()
-
-   
   },
   methods: {
-    //แก้ไข ข้อมูล
-    edit_survey(){
-   
-      // alert(this.storeidedit)
-
-        axios
-        .get(`${this.$axios.defaults.baseURL}surveydrug_edit.php`, {
-          params: {
-            storeid: this.storeidedit,
-          },
-        })
-        .then((response) => {
-          this.source = response.data
-          this.switchs = true
-          this.row = true
-        })
-    },
-
     clear() {
       this.source = ''
       this.motivation = ''
@@ -302,7 +286,7 @@ export default {
     //เพิ่มข้อมูล
     adddata() {
       if (this.switchs) {
-        this.typedruggroup = '1'
+        this.typedruggroup = '8'
         this.addselect()
       }
     },

@@ -1,9 +1,10 @@
 <template>
   <div>
     <v-flex sm12 lg12>
-      <v-card>
-        <v-card-title> <h5>ข้อมูลร้านชำ</h5></v-card-title>
-
+      <v-card class="teal lighten-1">
+        <v-card-title>
+          <h4 class="yellow--text text--darken-2">ข้อมูลร้านชำ</h4>
+        </v-card-title>
         <v-toolbar card>
           <v-text-field
             v-model="search"
