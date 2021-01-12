@@ -6,14 +6,6 @@
         <v-widget title="  ข้อมูลยาที่พบจากการสำรวจในร้าน" icon="mdi-pill ">
           <div slot="widget-content">
             <v-row>
-              <v-col cols="12"
-                ><survey_data
-                  @show-dialog="showdiag"
-                  ref="refresh"
-                ></survey_data>
-              </v-col>
-            </v-row>
-            <v-row>
               <v-col cols="12">
                 <v-card class="teal lighten-1" dark>
                   <v-card-title>
@@ -38,6 +30,15 @@
                     ></v-autocomplete>
                   </v-card-text>
                 </v-card>
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="12"
+                ><survey_data
+                  @show-dialog="showdiag"
+                  ref="refresh"
+                ></survey_data>
               </v-col>
             </v-row>
 
@@ -255,31 +256,100 @@
               <v-col cols="12">
                 <surveydrug
                   :storeid="storeid"
-                  ref="child"
                   :storeidedit="storeidedit"
+                  ref="child"
                 ></surveydrug>
-                <surveydrug2 :storeid="storeid" ref="child2"></surveydrug2>
-                <surveydrug3 :storeid="storeid" ref="child3"></surveydrug3>
-                <surveydrug4 :storeid="storeid" ref="child4"></surveydrug4>
-                <surveydrug5 :storeid="storeid" ref="child5"></surveydrug5>
-                <surveydrug6 :storeid="storeid" ref="child6"></surveydrug6>
-                <surveydrug7 :storeid="storeid" ref="child7"></surveydrug7>
-                <surveydrug8 :storeid="storeid" ref="child8"></surveydrug8>
-                <surveydrug9 :storeid="storeid" ref="child9"></surveydrug9>
-                <surveydrug10 :storeid="storeid" ref="child10"></surveydrug10>
-                <surveydrug11 :storeid="storeid" ref="child11"></surveydrug11>
-                <surveydrug12 :storeid="storeid" ref="child12"></surveydrug12>
-                <other :storeid="storeid" ref="other"></other>
+                <surveydrug2
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child2"
+                ></surveydrug2>
+                <surveydrug3
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child3"
+                ></surveydrug3>
+                <surveydrug4
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child4"
+                ></surveydrug4>
+                <surveydrug5
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child5"
+                ></surveydrug5>
+                <surveydrug6
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child6"
+                ></surveydrug6>
+                <surveydrug7
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child7"
+                ></surveydrug7>
+                <surveydrug8
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child8"
+                ></surveydrug8>
+                <surveydrug9
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child9"
+                ></surveydrug9>
+                <surveydrug10
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child10"
+                ></surveydrug10>
+                <surveydrug11
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child11"
+                ></surveydrug11>
+                <surveydrug12
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="child12"
+                ></surveydrug12>
+                <other
+                  :storeid="storeid"
+                  :storeidedit="storeidedit"
+                  ref="other"
+                ></other>
               </v-col>
               <v-col cols="12" align="end">
                 <v-btn
                   large
+                  v-if="!btnshow"
                   class="red--text text--lighten-5"
                   color="teal lighten-1"
                   flat
                   @click="adds"
                 >
                   <v-icon medium>mdi-content-save </v-icon>เพิ่ม</v-btn
+                >
+                <v-btn
+                  large
+                  v-if="btnshow"
+                  color="#0e49b5"
+                  @click="updatestore()"
+                  dark
+                >
+                  <v-icon medium>mdi-content-save-edit </v-icon>
+                  <h4>แก้ไข</h4></v-btn
+                >
+                <v-btn
+                  large
+                  v-if="btnshow"
+                  color="#c56183"
+                  @click="removeleave()"
+                  dark
+                >
+                  <v-icon medium>mdi-delete-forever </v-icon>
+                  <h4>ลบ</h4></v-btn
                 >
               </v-col>
             </v-row>
@@ -340,6 +410,7 @@ export default {
   data: () => ({
     dialog: false,
     chips: false,
+    btnshow: false,
 
     store_name_all: '',
     store_name: '',
@@ -377,6 +448,7 @@ export default {
     },
     //เลือก store ตาม id และ แสดง progress
     async onChange() {
+      this.$refs.child.clear()
       this.textadd = true
       this.textedit = false
       await axios
@@ -480,7 +552,6 @@ export default {
               icon: 'success',
               confirmButtonText: 'ตกลง',
             })
-            this.clear()
           } else {
             this.$swal({
               title: 'สถานะการเพิ่ม',
@@ -494,12 +565,12 @@ export default {
 
     //เลือก store ตาม id และ แสดง progress
     async showdiag(payload) {
+      this.store_name_select = ''
       this.textedit = true
       this.textadd = false
       this.dialog = payload.dialog
       this.storeidedit = payload.storeid
 
-      this.$refs.child.edit_survey()
       await axios
         .get(`${this.$axios.defaults.baseURL}store_search.php`, {
           params: {
@@ -535,6 +606,274 @@ export default {
           this.chips = true
           // window.scrollTo(0, 0)
         })
+
+      this.$refs.child.edit_survey()
+      this.$refs.child2.edit_survey()
+      this.$refs.child3.edit_survey()
+      this.$refs.child4.edit_survey()
+      this.$refs.child5.edit_survey()
+      this.$refs.child6.edit_survey()
+      this.$refs.child7.edit_survey()
+      this.$refs.child8.edit_survey()
+      this.$refs.child9.edit_survey()
+      this.$refs.child10.edit_survey()
+      this.$refs.child11.edit_survey()
+      this.$refs.child12.edit_survey()
+      this.$refs.other.edit_survey()
+      this.btnshow = true
+    },
+
+    updatestore() {
+      this.$refs.child.update_survey()
+      this.$refs.child2.update_survey()
+      this.$refs.child3.update_survey()
+      this.$refs.child4.update_survey()
+      this.$refs.child5.update_survey()
+      this.$refs.child6.update_survey()
+      this.$refs.child7.update_survey()
+      this.$refs.child8.update_survey()
+      this.$refs.child9.update_survey()
+      this.$refs.child10.update_survey()
+      this.$refs.child11.update_survey()
+      this.$refs.child12.update_survey()
+      this.$refs.other.update_survey()
+      this.btnshow = false
+      this.textedit = false
+
+      this.clearform()
+    },
+    removeleave() {
+      if (!this.storeid) {
+        this.$swal({
+          title: 'แจ้งเตือน',
+          text: 'ไม่พบข้อมูล',
+          icon: 'error',
+          confirmButtonText: 'ตกลง',
+        })
+      } else {
+        this.$swal({
+          title: 'คุณแน่ใจว่าต้องการลบข้อมูลนี้?',
+          text: 'ไอดี: ' + this.storeid,
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#51adcf',
+          cancelButtonColor: '#686d76',
+          confirmButtonText: 'ลบ',
+          cancelButtonText: 'ยกเลิก',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            //romvoe source
+            axios
+              .put(`${this.$axios.defaults.baseURL}source_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+            //romvoe motivation
+            axios
+              .put(`${this.$axios.defaults.baseURL}motivation_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //romvoe generic
+            axios
+              .put(`${this.$axios.defaults.baseURL}generic_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //romvoe drugstore_select
+            axios
+              .put(
+                `${this.$axios.defaults.baseURL}drugstore_select_delete.php`,
+                {
+                  storeid: this.storeid,
+                }
+              )
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //romvoe tradename
+            axios
+              .put(`${this.$axios.defaults.baseURL}tradename_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //romvoe other
+            axios
+              .put(`${this.$axios.defaults.baseURL}other_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //romvoe main
+            axios
+              .put(`${this.$axios.defaults.baseURL}main_survey_delete.php`, {
+                storeid: this.storeid,
+              })
+              .then((response) => {
+                this.message = response.data
+                if (this.message[0].message === 'ลบข้อมูลสำเร็จ') {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'success',
+                    confirmButtonText: 'ตกลง',
+                  })
+                  this.clearform()
+                  //เรียก refresh table ใน component
+                  this.$refs.child.refresh_drugstore()
+                } else {
+                  this.$swal({
+                    title: 'สถานะการลบ',
+                    text: this.message[0].message,
+                    icon: 'error',
+                    confirmButtonText: 'ตกลง',
+                  })
+                }
+              })
+
+            //clear ใน component
+            this.$refs.child.clear()
+            this.$refs.child2.clear()
+            this.$refs.child3.clear()
+            this.$refs.child4.clear()
+            this.$refs.child5.clear()
+            this.$refs.child6.clear()
+            this.$refs.child7.clear()
+            this.$refs.child8.clear()
+            this.$refs.child9.clear()
+            this.$refs.child10.clear()
+            this.$refs.child11.clear()
+            this.$refs.child12.clear()
+            this.$refs.other.clear()
+            // refresh table
+            this.$refs.refresh.refresh_drugstore()
+            //หลับไปด้านบน
+            window.scrollTo(0, 0)
+          }
+        })
+      }
     },
   },
 }

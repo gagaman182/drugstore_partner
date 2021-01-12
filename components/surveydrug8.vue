@@ -173,20 +173,7 @@
               </v-col>
             </v-row>
 
-            <!-- <v-row>
-              <v-col><v-divider></v-divider></v-col>
-              <v-col cols="12" align="end">
-                <v-btn
-                  large
-                  class="red--text text--lighten-5"
-                  color="teal lighten-1"
-                  flat
-                  @click="adddata"
-                >
-                  <v-icon medium>mdi-content-save </v-icon>เพิ่ม</v-btn
-                >
-              </v-col></v-row
-            > -->
+         
           </v-card-text>
         </v-card>
       </v-col>
@@ -200,6 +187,7 @@ export default {
   name: 'surveydrug8',
   props: {
     storeid: null,
+     storeidedit: null,
   },
   data: () => ({
     row: false,
@@ -230,12 +218,122 @@ export default {
     this.fecth_generic()
   },
   methods: {
+    //แก้ไข ข้อมูล 
+    edit_survey(){
+   let typedruggroup = '8'
+    this.source = ''
+      this.motivation = ''
+      this.generic = ''
+      this.tradename = ''
+      this.drugstore = ''
+      this.other = ''
+      
+//source แหล่ง
+        axios
+        .get(`${this.$axios.defaults.baseURL}surveydrug_source_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             typedruggroup: typedruggroup 
+          },
+        })
+        .then((response) => {
+           let source_edit = response.data
+         this.source = source_edit.map(item => item.source);
+        
+          this.switchs = true
+          this.row = true
+        })
+
+        //motivation เหตุผล
+        axios
+        .get(`${this.$axios.defaults.baseURL}surveydrug_motivation_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             typedruggroup: typedruggroup 
+          },
+        })
+        .then((response) => {
+         let motivation_edit = response.data
+         this.motivation = motivation_edit.map(item => item.motivation);
+        
+      
+          this.switchs = true
+          this.row = true
+        })
+
+         //generic ชื่อยา
+        axios
+        .get(`${this.$axios.defaults.baseURL}surveydrug_generic_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             typedruggroup: typedruggroup 
+          },
+        })
+        .then((response) => {
+         
+            let generic_edit = response.data
+         this.generic = generic_edit.map(item => item.generic);
+        
+          this.switchs = true
+          this.row = true
+        })
+
+          //generic ชื่อทางการค้า
+        axios
+        .get(`${this.$axios.defaults.baseURL}surveydrug_tradename_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             typedruggroup: typedruggroup 
+          },
+        })
+        .then((response) => {
+        
+         let tradename_edit = response.data
+         this.tradename = tradename_edit.map(item => item.tradename);
+          this.switchs = true
+          this.row = true
+        })
+
+        //generic ชื่อแหล่งซื้อ
+        axios
+        .get(`${this.$axios.defaults.baseURL}surveydrug_drugstore_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             typedruggroup: typedruggroup 
+          },
+        })
+        .then((response) => {
+         
+        let drugstore_edit = response.data
+         this.drugstore = drugstore_edit.map(item => item.drugstore);
+        
+          this.switchs = true
+          this.row = true
+        })
+
+         //other 
+        axios
+        .get(`${this.$axios.defaults.baseURL}other_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+             
+          },
+        })
+        .then((response) => {
+          this.other = response.data[0].other
+        console.log( this.other)
+          this.row = true
+        })
+
+        
+    },
     clear() {
       this.source = ''
       this.motivation = ''
       this.generic = ''
       this.tradename = ''
       this.drugstore = ''
+        this.other = ''
       this.switchs = false
       this.row = false
     },
@@ -289,6 +387,16 @@ export default {
         this.typedruggroup = '8'
         this.addselect()
       }
+    },
+    
+          //update ข้อมูล
+    update_survey() {
+     
+        this.typedruggroup = '8'
+       
+        this.updatesurvey()
+        this.addselect()
+     
     },
 
     addselect() {
@@ -482,6 +590,73 @@ export default {
           })
       }
     },
+     updatesurvey() {
+ 
+      //วนลูป แหล่งซื้อ
+       
+        axios
+          .put(`${this.$axios.defaults.baseURL}source_update.php`, {
+            storeid: this.storeid,
+       
+            typedruggroup: this.typedruggroup,
+          })
+          .then((response) => {
+            this.message = response.data
+          
+          })
+
+        
+
+       //วนลูป เหตุผลการจำหน่าย
+
+      axios
+          .put(`${this.$axios.defaults.baseURL}motivation_update.php`, {
+            storeid: this.storeid,
+        
+            typedruggroup: this.typedruggroup,
+          })
+          .then((response) => {
+            this.message = response.data
+          })
+      
+   
+
+       //วนลูป ชื่อแหล่งซื้อ
+
+     axios
+          .put(`${this.$axios.defaults.baseURL}drugstore_select_update.php`, {
+            storeid: this.storeid,
+         
+            typedruggroup: this.typedruggroup,
+          })
+          .then((response) => {
+            this.message = response.data
+          })
+   
+       //วนลูป ชื่อการค้า
+     axios
+          .put(`${this.$axios.defaults.baseURL}tradename_update.php`, {
+            storeid: this.storeid,
+       
+            typedruggroup: this.typedruggroup,
+          })
+          .then((response) => {
+            this.message = response.data
+          })
+
+       //วนลูป ชื่อยา
+
+        axios
+          .put(`${this.$axios.defaults.baseURL}generic_update.php`, {
+            storeid: this.storeid,
+      
+            typedruggroup: this.typedruggroup,
+          })
+          .then((response) => {
+            this.message = response.data
+          })
+   
+     },
   },
 }
 </script>

@@ -10,14 +10,17 @@
   $typedruggroup = $data['typedruggroup'];
  
   
-
+ 
 
 
 
 include 'conn.php';
 
 
+if (empty($sourceid)) {
+  $row_array['message'] = "เพิ่มข้อมูลสำเร็จ444";
 
+}else{
 
 
  // หา record ล่าสุด
@@ -61,7 +64,7 @@ if (!empty($storeid)) {
 
 
       }
-      
+    } 
 mysqli_close($conn);
 	
 echo json_encode($return_message);

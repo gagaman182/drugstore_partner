@@ -4,10 +4,14 @@
 	 include 'conn.php';
 
     $storeid = $_GET["storeid"];
+    $typedruggroup = $_GET["typedruggroup"];
+
+   
+      $sql = "select t_motivation.motivation,t_motivation.name  from motivation INNER JOIN t_motivation on motivation.motivationid = t_motivation.motivation
+      where  typedruggroup = '".$typedruggroup."' and storeid  = '".$storeid."'
 
 
- $sql = "select t_source.source,t_source.name  from source INNER JOIN t_source on source.sourceid = t_source.source
- where  typedruggroup = '1' and storeid  = '1' 
+
 
 
 ";

@@ -34,6 +34,7 @@ export default {
   name: 'other',
   props: {
     storeid: null,
+    storeidedit: null,
   },
   data: () => ({
     other: '',
@@ -71,6 +72,50 @@ export default {
     },
     clear() {
       this.other = ''
+    },
+    //แก้ไข ข้อมูล
+    edit_survey() {
+      //other
+      axios
+        .get(`${this.$axios.defaults.baseURL}other_edit.php`, {
+          params: {
+            storeid: this.storeidedit,
+          },
+        })
+        .then((response) => {
+          this.other = response.data[0].other
+
+          this.row = true
+        })
+    },
+
+    update_survey() {
+      //วนลูป other
+
+      axios
+        .put(`${this.$axios.defaults.baseURL}other_update.php`, {
+          storeid: this.storeid,
+          other: this.other,
+        })
+        .then((response) => {
+          this.message = response.data
+          if (this.message[0].message === 'เพิ่มข้อมูลสำเร็จ') {
+            this.$swal({
+              title: 'สถานะการเพิ่ม',
+              text: this.message[0].message,
+              icon: 'success',
+              confirmButtonText: 'ตกลง',
+            })
+            this.clear()
+          } else {
+            this.$swal({
+              title: 'สถานะการเพิ่ม',
+              text: this.message[0].message,
+              icon: 'error',
+              confirmButtonText: 'ตกลง',
+            })
+          }
+        })
     },
   },
 }

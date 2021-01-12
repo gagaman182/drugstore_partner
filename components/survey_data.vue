@@ -2,9 +2,9 @@
   <div>
     <v-row>
       <v-col sm12>
-        <v-card class="teal lighten-1">
+        <v-card class="purple darken-3">
           <v-card-title>
-            <h4 class="yellow--text text--darken-2">
+            <h4 class="white--text text--darken-2">
               ข้อมูลร้านชำที่บันทึกการสำรวจยาแล้ว
             </h4>
           </v-card-title>
@@ -79,6 +79,10 @@ export default {
     handleClick(value) {
       this.dialog = true
       this.$emit('show-dialog', { dialog: this.dialog, storeid: value.storeid })
+    },
+
+    refresh_drugstore() {
+      this.fetch_drugstore()
     },
   },
 }
