@@ -84,14 +84,14 @@ export default {
           to: '/survey',
         },
         {
-          icon: 'mdi-monitor-dashboard',
-          title: 'รายงาน',
-          to: '/report',
-        },
-        {
           icon: 'mdi-view-grid-plus ',
           title: 'ระบบสนับสนุน',
           to: '/backend',
+        },
+        {
+          icon: 'mdi-monitor-dashboard',
+          title: 'รายงาน',
+          to: '/report',
         },
       ],
       miniVariant: false,

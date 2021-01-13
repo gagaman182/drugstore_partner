@@ -448,9 +448,28 @@ export default {
     },
     //เลือก store ตาม id และ แสดง progress
     async onChange() {
-      this.$refs.child.clear()
       this.textadd = true
+      this.btnshow = false
       this.textedit = false
+
+      //clear ใน component
+      this.$refs.child.clear()
+      this.$refs.child2.clear()
+      this.$refs.child3.clear()
+      this.$refs.child4.clear()
+      this.$refs.child5.clear()
+      this.$refs.child6.clear()
+      this.$refs.child7.clear()
+      this.$refs.child8.clear()
+      this.$refs.child9.clear()
+      this.$refs.child10.clear()
+      this.$refs.child11.clear()
+      this.$refs.child12.clear()
+      this.$refs.other.clear()
+      // refresh table
+      this.$refs.refresh.refresh_drugstore()
+      //หลับไปด้านบน
+      window.scrollTo(0, 0)
       await axios
         .get(`${this.$axios.defaults.baseURL}store_search.php`, {
           params: {
@@ -515,6 +534,10 @@ export default {
       this.timestart = ''
       this.store_name_select = ''
       this.chips = false
+      this.dialog = false
+      this.btnshow = false
+      this.textedit = false
+      this.textadd = false
     },
     //เรียกใช้ function ในแต่ล่ะ components
     adds() {

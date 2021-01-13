@@ -455,6 +455,7 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.cleartext()
+              this.$refs.child.refresh_drugstore()
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',

@@ -1,5 +1,5 @@
 <template>
   <v-layout>
-    <v-flex class="text-center"> รายงาน </v-flex>
+    <v-flex class="text-center"><h1>รายงาน</h1> </v-flex>
   </v-layout>
 </template>

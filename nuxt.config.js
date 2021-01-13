@@ -98,4 +98,8 @@ export default {
      ** See https://nuxtjs.org/api/configuration-build/
      */
     build: {},
+    // setให้สามารถ run คำสั่ง npm run generate แล้วได้ ไฟล์ dist เอาข้างในไป ใส่ใน path ที่เราต้องการ
+    router: {
+        base: '/dsonline',
+    },
 }
