@@ -17,22 +17,22 @@
 include 'conn.php';
 
 
-if (empty($sourceid)) {
-  $row_array['message'] = "เพิ่มข้อมูลสำเร็จ";
+// if (empty($sourceid)) {
+//   $row_array['message'] = "เพิ่มข้อมูลสำเร็จ";
 
-}else{
+// }else{
 
 
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from source";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from source";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -41,9 +41,10 @@ if (!empty($storeid)) {
  
 
     
-       $strvisit  = "  INSERT INTO source(id,storeid,sourceid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$sourceid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
-        
+      //  $strvisit  = "  INSERT INTO source(id,storeid,sourceid,typedruggroup,dateadd) 
+      //   VALUES('".$id."','".$storeid."','".$sourceid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+            $strvisit  = "  INSERT INTO source(storeid,sourceid,typedruggroup,dateadd) 
+            VALUES('".$storeid."','".$sourceid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
         
         if ($conn->query($strvisit) === TRUE) {
@@ -64,7 +65,7 @@ if (!empty($storeid)) {
 
 
       }
-    } 
+    // } 
 mysqli_close($conn);
 	
 echo json_encode($return_message);

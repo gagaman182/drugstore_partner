@@ -14,16 +14,16 @@ include 'conn.php';
 
 
 
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from motivation";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from motivation";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -31,9 +31,10 @@ if ($result = mysqli_query( $conn, $sql )){
 if (!empty($storeid)) {
  
   
-       $strvisit  = "  INSERT INTO motivation(id,storeid,motivationid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$motivationid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
-        
+      //  $strvisit  = "  INSERT INTO motivation(id,storeid,motivationid,typedruggroup,dateadd) 
+      //   VALUES('".$id."','".$storeid."','".$motivationid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+         $strvisit  = "  INSERT INTO motivation(storeid,motivationid,typedruggroup,dateadd) 
+         VALUES('".$storeid."','".$motivationid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
            
         if ($conn->query($strvisit) === TRUE) {
           

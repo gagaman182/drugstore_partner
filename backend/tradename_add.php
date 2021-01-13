@@ -20,16 +20,16 @@ include 'conn.php';
 
 
 
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from tradename";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from tradename";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -38,9 +38,10 @@ if (!empty($storeid)) {
  
 
     
-       $strvisit  = "  INSERT INTO tradename(id,storeid,tradenameid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$tradenameid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
-        
+      //  $strvisit  = "  INSERT INTO tradename(id,storeid,tradenameid,typedruggroup,dateadd) 
+      //   VALUES('".$id."','".$storeid."','".$tradenameid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+         $strvisit  = "  INSERT INTO tradename(storeid,tradenameid,typedruggroup,dateadd) 
+         VALUES('".$storeid."','".$tradenameid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
         
         if ($conn->query($strvisit) === TRUE) {

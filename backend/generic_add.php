@@ -20,16 +20,16 @@ include 'conn.php';
 
 
 
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from generic";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from generic";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -38,10 +38,12 @@ if (!empty($storeid)) {
  
 
     
-       $strvisit  = "  INSERT INTO generic(id,storeid,genericid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$genericid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+      //  $strvisit  = "  INSERT INTO generic(id,storeid,genericid,typedruggroup,dateadd) 
+      //   VALUES('".$id."','".$storeid."','".$genericid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
-        
+      $strvisit  = "  INSERT INTO generic(storeid,genericid,typedruggroup,dateadd) 
+      VALUES('".$storeid."','".$genericid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+      
         
         if ($conn->query($strvisit) === TRUE) {
           

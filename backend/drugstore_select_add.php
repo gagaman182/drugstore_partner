@@ -20,16 +20,16 @@ include 'conn.php';
 
 
 
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from drugstore_select";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from drugstore_select";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -38,10 +38,11 @@ if (!empty($storeid)) {
  
 
     
-       $strvisit  = "  INSERT INTO drugstore_select(id,storeid,drugstoreid,typedruggroup,dateadd) 
-        VALUES('".$id."','".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+      //  $strvisit  = "  INSERT INTO drugstore_select(id,storeid,drugstoreid,typedruggroup,dateadd) 
+      //   VALUES('".$id."','".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
-        
+        $strvisit  = "  INSERT INTO drugstore_select(storeid,drugstoreid,typedruggroup,dateadd) 
+        VALUES(".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
         if ($conn->query($strvisit) === TRUE) {
           
