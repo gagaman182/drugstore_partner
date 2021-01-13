@@ -558,6 +558,20 @@ export default {
       this.clearform()
       window.scrollTo(0, 0)
       this.$refs.refresh.fetch_drugstore()
+      //clear ใน component
+      this.$refs.child.clear()
+      this.$refs.child2.clear()
+      this.$refs.child3.clear()
+      this.$refs.child4.clear()
+      this.$refs.child5.clear()
+      this.$refs.child6.clear()
+      this.$refs.child7.clear()
+      this.$refs.child8.clear()
+      this.$refs.child9.clear()
+      this.$refs.child10.clear()
+      this.$refs.child11.clear()
+      this.$refs.child12.clear()
+      this.$refs.other.clear()
     },
 
     addsurvey() {
@@ -662,8 +676,23 @@ export default {
       this.$refs.other.update_survey()
       this.btnshow = false
       this.textedit = false
-
       this.clearform()
+      window.scrollTo(0, 0)
+      this.$refs.refresh.fetch_drugstore()
+      //clear ใน component
+      this.$refs.child.clear()
+      this.$refs.child2.clear()
+      this.$refs.child3.clear()
+      this.$refs.child4.clear()
+      this.$refs.child5.clear()
+      this.$refs.child6.clear()
+      this.$refs.child7.clear()
+      this.$refs.child8.clear()
+      this.$refs.child9.clear()
+      this.$refs.child10.clear()
+      this.$refs.child11.clear()
+      this.$refs.child12.clear()
+      this.$refs.other.clear()
     },
     removeleave() {
       if (!this.storeid) {

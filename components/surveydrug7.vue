@@ -342,15 +342,17 @@ export default {
 
     addselect() {
       //วนลูป แหล่งซื้อ
-      for (
-        this.isource = 0;
-        this.isource < this.source.length;
-        this.isource++
-      ) {
+      // for (
+      //   this.isource = 0;
+      //   this.isource < this.source.length;
+      //   this.isource++
+      // )
+      let s = ''
+      for (s in this.source) {
         axios
           .post(`${this.$axios.defaults.baseURL}source_add.php`, {
             storeid: this.storeid,
-            sourceid: this.source[this.isource],
+            sourceid: this.source[s],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -364,6 +366,10 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
+              //สั้ง clear from ข้างนอก
+              // this.$emit('clear-form', {
+              //   clears: 'clear',
+              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -376,15 +382,17 @@ export default {
       }
 
       //วนลูป เหตุผลการจำหน่าย
-      for (
-        this.imotivation = 0;
-        this.imotivation < this.motivation.length;
-        this.imotivation++
-      ) {
+      // for (
+      //   this.imotivation = 0;
+      //   this.imotivation < this.motivation.length;
+      //   this.imotivation++
+      // )
+      let m = ''
+      for (m in this.motivation) {
         axios
           .post(`${this.$axios.defaults.baseURL}motivation_add.php`, {
             storeid: this.storeid,
-            motivationid: this.motivation[this.imotivation],
+            motivationid: this.motivation[m],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -398,6 +406,10 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
+              //สั้ง clear from ข้างนอก
+              // this.$emit('clear-form', {
+              //   clears: 'clear',
+              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -410,15 +422,17 @@ export default {
       }
 
       //วนลูป ชื่อแหล่งซื้อ
-      for (
-        this.idrugstore = 0;
-        this.idrugstore < this.drugstore.length;
-        this.idrugstore++
-      ) {
+      // for (
+      //   this.idrugstore = 0;
+      //   this.idrugstore < this.drugstore.length;
+      //   this.idrugstore++
+      // )
+      let d = ''
+      for (d in this.drugstore) {
         axios
           .post(`${this.$axios.defaults.baseURL}drugstore_select_add.php`, {
             storeid: this.storeid,
-            drugstoreid: this.drugstore[this.idrugstore],
+            drugstoreid: this.drugstore[d],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -432,6 +446,10 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
+              //สั้ง clear from ข้างนอก
+              // this.$emit('clear-form', {
+              //   clears: 'clear',
+              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -444,15 +462,17 @@ export default {
       }
 
       //วนลูป ชื่อการค้า
-      for (
-        this.itradename = 0;
-        this.itradename < this.tradename.length;
-        this.itradename++
-      ) {
+      // for (
+      //   this.itradename = 0;
+      //   this.itradename < this.tradename.length;
+      //   this.itradename++
+      // )
+      let t = ''
+      for (t in this.tradename) {
         axios
           .post(`${this.$axios.defaults.baseURL}tradename_add.php`, {
             storeid: this.storeid,
-            tradenameid: this.tradename[this.itradename],
+            tradenameid: this.tradename[t],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -466,6 +486,10 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
+              //สั้ง clear from ข้างนอก
+              // this.$emit('clear-form', {
+              //   clears: 'clear',
+              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
@@ -478,15 +502,17 @@ export default {
       }
 
       //วนลูป ชื่อยา
-      for (
-        this.igeneric = 0;
-        this.igeneric < this.generic.length;
-        this.igeneric++
-      ) {
+      // for (
+      //   this.igeneric = 0;
+      //   this.igeneric < this.generic.length;
+      //   this.igeneric++
+      // )
+      let g = ''
+      for (g in this.generic) {
         axios
           .post(`${this.$axios.defaults.baseURL}generic_add.php`, {
             storeid: this.storeid,
-            genericid: this.generic[this.igeneric],
+            genericid: this.generic[g],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -500,6 +526,10 @@ export default {
                 confirmButtonText: 'ตกลง',
               })
               this.clear()
+              //สั้ง clear from ข้างนอก
+              // this.$emit('clear-form', {
+              //   clears: 'clear',
+              // })
             } else {
               this.$swal({
                 title: 'สถานะการเพิ่ม',
