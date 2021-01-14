@@ -338,7 +338,7 @@ export default {
       this.typedruggroup = '2'
 
       this.updatesurvey()
-      this.addselect()
+      // this.addselect()
     },
 
     addselect() {

@@ -337,7 +337,7 @@ export default {
       this.typedruggroup = '6'
 
       this.updatesurvey()
-      this.addselect()
+      // this.addselect()
     },
     addselect() {
       //วนลูป แหล่งซื้อ

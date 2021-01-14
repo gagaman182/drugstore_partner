@@ -85,6 +85,7 @@
                     multiple
                     outlined
                   ></v-select>
+                 
                 </div>
               </v-col>
               <v-col cols="12" md="4"
@@ -99,6 +100,7 @@
                     multiple
                     outlined
                   ></v-select>
+                  
                 </div>
               </v-col>
             </v-row>
@@ -142,6 +144,7 @@
                     multiple
                     outlined
                   ></v-select>
+               
                 </div>
               </v-col>
               <v-col cols="12" md="4"
@@ -159,6 +162,7 @@
                     multiple
                     outlined
                   ></v-select>
+                    
                 </div>
               </v-col>
 
@@ -177,6 +181,7 @@
                     multiple
                     outlined
                   ></v-select>
+             
                 </div>
               </v-col>
             </v-row>
@@ -218,6 +223,11 @@ export default {
     drugstore_list: [],
     message: '',
     surveydrugdetails:'',
+    s:'',
+    m:'',
+    g:'',
+    d:'',
+    t:''
    
   }),
   mounted() {
@@ -409,7 +419,7 @@ export default {
         this.typedruggroup = '1'
        
         this.updatesurvey()
-        this.addselect()
+        // this.addselect()
      
     },
 
@@ -420,13 +430,13 @@ export default {
       //   this.isource < this.source.length;
       //   this.isource++
       // )
-      let s = ''
-      for(s in this.source)
+       
+      for(this.s  in this.source)
        {
         axios
           .post(`${this.$axios.defaults.baseURL}source_add.php`, {
             storeid: this.storeid,
-            sourceid: this.source[s],
+            sourceid: this.source[this.s ],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -461,13 +471,13 @@ export default {
       //   this.imotivation < this.motivation.length;
       //   this.imotivation++
       // ) 
-       let m = ''
-      for(m in this.motivation)
+       
+      for(this.m in this.motivation)
       {
         axios
           .post(`${this.$axios.defaults.baseURL}motivation_add.php`, {
             storeid: this.storeid,
-            motivationid: this.motivation[m],
+            motivationid: this.motivation[this.m ],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -502,13 +512,13 @@ export default {
       //   this.idrugstore < this.drugstore.length;
       //   this.idrugstore++
       // ) 
-        let d = ''
-      for(d in this.drugstore)
+     
+      for(this.d in this.drugstore)
       {
         axios
           .post(`${this.$axios.defaults.baseURL}drugstore_select_add.php`, {
             storeid: this.storeid,
-            drugstoreid: this.drugstore[d],
+            drugstoreid: this.drugstore[this.d],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -543,13 +553,13 @@ export default {
       //   this.itradename < this.tradename.length;
       //   this.itradename++
       // ) 
-        let t = ''
-      for(t in this.tradename)
+     
+      for(this.t in this.tradename)
       {
         axios
           .post(`${this.$axios.defaults.baseURL}tradename_add.php`, {
             storeid: this.storeid,
-            tradenameid: this.tradename[t],
+            tradenameid: this.tradename[this.t],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -584,13 +594,13 @@ export default {
       //   this.igeneric < this.generic.length;
       //   this.igeneric++
       // ) 
-        let g = ''
-      for(g in this.generic)
+     
+      for(this.g in this.generic)
       {
         axios
           .post(`${this.$axios.defaults.baseURL}generic_add.php`, {
             storeid: this.storeid,
-            genericid: this.generic[g],
+            genericid: this.generic[this.g],
             typedruggroup: this.typedruggroup,
           })
           .then((response) => {
@@ -634,6 +644,7 @@ export default {
           })
           .then((response) => {
             this.message = response.data
+              this.addselect()
           
           })
 
@@ -689,7 +700,7 @@ export default {
           })
 
           
-   
+
      },
   
   },

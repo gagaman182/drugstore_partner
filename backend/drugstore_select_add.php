@@ -42,7 +42,7 @@ if (!empty($storeid)) {
       //   VALUES('".$id."','".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
         $strvisit  = "  INSERT INTO drugstore_select(storeid,drugstoreid,typedruggroup,dateadd) 
-        VALUES(".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
+        VALUES('".$storeid."','".$drugstoreid."','".$typedruggroup."',CURRENT_TIMESTAMP)";
         
         if ($conn->query($strvisit) === TRUE) {
           
