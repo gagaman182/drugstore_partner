@@ -431,7 +431,7 @@ export default {
     dialog(val) {
       if (!val) return
 
-      setTimeout(() => (this.dialog = false), 500)
+      setTimeout(() => (this.dialog = false), 1000)
     },
   },
   mounted() {
@@ -557,6 +557,7 @@ export default {
       this.$refs.other.adddata()
       this.clearform()
       window.scrollTo(0, 0)
+      this.$refs.refresh.refresh_drugstore()
       this.$refs.refresh.fetch_drugstore()
       //clear ใน component
       this.$refs.child.clear()
@@ -572,6 +573,7 @@ export default {
       this.$refs.child11.clear()
       this.$refs.child12.clear()
       this.$refs.other.clear()
+      this.dialog = true
     },
 
     addsurvey() {
@@ -691,6 +693,7 @@ export default {
       this.textedit = false
       this.clearform()
       window.scrollTo(0, 0)
+      this.$refs.refresh.refresh_drugstore()
       this.$refs.refresh.fetch_drugstore()
       //clear ใน component
       this.$refs.child.clear()
@@ -706,6 +709,7 @@ export default {
       this.$refs.child11.clear()
       this.$refs.child12.clear()
       this.$refs.other.clear()
+      this.dialog = true
     },
     removeleave() {
       if (!this.storeid) {
@@ -743,7 +747,8 @@ export default {
                   })
                   this.clearform()
                   //เรียก refresh table ใน component
-                  this.$refs.child.refresh_drugstore()
+                  this.$refs.refresh.refresh_drugstore()
+                  this.$refs.refresh.fetch_drugstore()
                 } else {
                   this.$swal({
                     title: 'สถานะการลบ',

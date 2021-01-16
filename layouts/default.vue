@@ -86,7 +86,7 @@ export default {
         {
           icon: 'mdi-view-grid-plus ',
           title: 'ระบบสนับสนุน',
-          to: '/backend',
+          to: '/backends',
         },
         {
           icon: 'mdi-monitor-dashboard',

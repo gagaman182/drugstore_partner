@@ -70,7 +70,12 @@ export default {
      ** See https://axios.nuxtjs.org/options
      */
     axios: {
-        baseURL: 'http://localhost/drugstore/backend/',
+        //home
+        // baseURL: 'http://localhost/drugstore/backend/',
+        //server 5.1
+        // baseURL: 'http://192.168.5.1/dsonline/backend/',
+        //takis
+        baseURL: 'http://localhost/dsonline/backend/',
     },
     /*
      ** vuetify module configuration

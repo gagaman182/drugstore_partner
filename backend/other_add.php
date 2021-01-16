@@ -16,20 +16,17 @@
 
 include 'conn.php';
 
-Q
 
-
-
- // หา record ล่าสุด
-$sql = "SELECT count(*) as total from other";
+//  // หา record ล่าสุด
+// $sql = "SELECT count(*) as total from other";
  
-if ($result = mysqli_query( $conn, $sql )){
+// if ($result = mysqli_query( $conn, $sql )){
   
-   while ($row = mysqli_fetch_assoc($result)) {
+//    while ($row = mysqli_fetch_assoc($result)) {
 
-     $id=$row['total']+1;
- }
-}
+//      $id=$row['total']+1;
+//  }
+// }
 
 
 
@@ -38,8 +35,8 @@ if (!empty($storeid)) {
  
 
     
-       $strvisit  = "  INSERT INTO other(id,storeid,other,dateadd) 
-        VALUES('".$id."','".$storeid."','".$other."',CURRENT_TIMESTAMP)";
+       $strvisit  = "  INSERT INTO other(storeid,other,dateadd) 
+        VALUES('".$storeid."','".$other."',CURRENT_TIMESTAMP)";
         
         
         

@@ -113,8 +113,8 @@ export default {
   },
   methods: {
     //แสดงข้อมูลร้านค้า
-    async fetch_drugstore() {
-      await axios
+    fetch_drugstore() {
+      axios
         .get(`${this.$axios.defaults.baseURL}drugstore_add_data.php`)
         .then((response) => {
           this.complex.items = response.data

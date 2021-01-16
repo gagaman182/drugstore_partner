@@ -6,12 +6,20 @@
 // $password = "123456";
 // $dbname = "leave";
 // $port = "3333";
-// home
-$servername = "localhost";
-$username = "root";
-$password = "123456789";
+// // home
+// $servername = "localhost";
+// $username = "root";
+// $password = "123456789";
+// $dbname = "drugstore";
+// $port = "3306";
+
+// takis 3
+$servername = "61.19.25.207";
+$username = "takis3";
+$password = "skho@00866";
 $dbname = "drugstore";
 $port = "3306";
+
 
 
 // Create connection
